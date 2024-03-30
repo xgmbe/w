@@ -10,6 +10,7 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
+from webdriver_manager.chrome import ChromeDriverManager
 
 
 # Function to initialize the WebDriver
@@ -20,7 +21,7 @@ def init_driver():
     options.add_argument(
         "--disable-dev-shm-usage"
     )  # Overcome limited resource problems
-    driver = webdriver.Chrome(options=options)
+    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
     driver.get("https://web.whatsapp.com/")
     return driver
 
