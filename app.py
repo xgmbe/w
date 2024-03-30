@@ -10,18 +10,14 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import TimeoutException
-from webdriver_manager.chrome import ChromeDriverManager
+from webdriver_manager.firefox import GeckoDriverManager
+
 
 
 # Function to initialize the WebDriver
 def init_driver():
-    options = webdriver.ChromeOptions()
-    options.add_argument("--no-sandbox")
-    options.add_argument("--disable-gpu")
-    options.add_argument(
-        "--disable-dev-shm-usage"
-    )  # Overcome limited resource problems
-    driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
+    service = Service(GeckoDriverManager().install())
+    driver = webdriver.Firefox(service=service)
     driver.get("https://web.whatsapp.com/")
     return driver
 
